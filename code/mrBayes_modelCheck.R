@@ -202,7 +202,7 @@ abline(0, 1)
 cf = colorRampPalette(c("gold", "blue"))
 cols = cf(10)
 Q_log = log(Q_in)
-ci = ceiling((Q_log - min(Q_log)) / (diff(range(Q_log)) + 1) * 10)
+ci = ceiling((Q_log - min(Q_log) + 0.01) / (diff(range(Q_log)) + 0.02) * 10)
 points(d_riv_obs, d_riv_mod, pch = 21, bg = cols[ci])
 #### The modeled values are the same as the d_rca_in values plotted above but
 # shifted slightly lower by the effects of Esurf. So we already knew to expect 

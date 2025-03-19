@@ -104,10 +104,8 @@ model {
     # Calculate f_cwf (the fraction of BWF that becomes CWF) based on CWF = BWF * f_cwf,
     # with connectivity of μ = 0.38 from Good et al (2015), 
     # Where f_cwf = (con / (1 - con) * MWF) / BWF
-    # with constraint to keep it between 0 and 1
-    
-    #f_cwf[i] <- (0.38 / (1 - 0.38) * MWF[i]) / BWF[i] 
-    f_cwf[i] <- ((0.38 / (1 - 0.38) * MWF[i]) / BWF[i]) 
+    # with with μ of f_cwf ~ 18%
+    f_cwf[i] ~ dbeta(9, 41)
     CWF[i] <- BWF[i]*f_cwf[i]
 
     # Soil & surface water θ evaporation parameters
@@ -120,26 +118,29 @@ model {
 
     # Change in D-excess of the water pools (soil and surface water)
     cap_d_soil[i] <- (epsilon_soil[i]/h[i]) /
-                 (1 + (BWF[i] / Esoil[i]) * ((1 - h[i])/h[i]))
-
+                 (1 + ((BWF[i]) / Esoil[i]) * ((1 - h[i])/h[i]))
+    
+    # Define Q_in from upstream reaches
+    Q_in[i] <- Q_us1[i] + Q_us2[i]
+    
     cap_d_surf[i] <- (epsilon_surf[i]/h[i]) /
-                 (1 + ((CWF[i] + MWF[i] + Q_us1[i]/P_rca[i] + Q_us2[i]/P_rca[i]) / Esurf[i]) * ((1 - h[i])/h[i]))
+                 (1 + ((CWF[i] + MWF[i] + Q_in[i]/P_rca[i]) / Esurf[i]) * ((1 - h[i])/h[i]))
 
     # Calculate the D-excess of the CWF
     d_cwf[i] <- d_p[i] + cap_d_soil[i]
 
     # Weighted D-excess of inflow
-    d_rca_in[i] <- ( (Q_us1[i]/P_rca[i]) * d_us1[i]
-                     + (Q_us2[i]/P_rca[i]) * d_us2[i]
+    d_rca_in[i] <- ( ((Q_us1[i]/P_rca[i]) * d_us1[i])
+                     + ((Q_us2[i]/P_rca[i]) * d_us2[i])
                      + CWF[i]*d_cwf[i]
                      + MWF[i]*d_p[i] ) /
-                   ( Q_us1[i]/P_rca[i] + Q_us1[i]/P_rca[i] + CWF[i] + MWF[i] )
+                   ( Q_in[i]/P_rca[i] + CWF[i] + MWF[i] )
 
     # Modeled D-excess of river water
     d_riv_mod[i] <- d_rca_in[i] + cap_d_surf[i]
 
     # Mass balance for stream runoff (Q_r) 
-    Q_r[i] <- Q_us1[i]/P_rca[i]+Q_us2[i]/P_rca[i] + (CWF[i] + MWF[i]) - Esurf[i]
+    Q_r[i] <- Q_in[i]/P_rca[i] + CWF[i] + MWF[i] - Esurf[i]
 
     # Likelihood for Q_r 
     Q_r_obs[i] ~ dnorm(Q_r[i], tau_q)  

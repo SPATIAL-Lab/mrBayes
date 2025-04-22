@@ -71,3 +71,23 @@ d_riv_mod
 
 # Accounting for surface evap makes things even worse
 points(d_riv, d_riv_mod, col = 2)
+
+# At the same time, Stephen's numbers suggest that 47% of P becomes streamflow,
+# whereas the ERA data shows an average closer to 30%. This is less problematic
+# imho since I might expect that runoff ratio would be lower in much of the MRB
+# than the global average.
+plot(density(d$q_eraS_e / P_rca))
+abline(v = CWF + MWF)
+
+# So the MCMC is trying to accomplish 2 contrasting goals: reduce the amount
+# of P that goes into streamflow (relative to the prior), and reduce the 
+# evaporation losses to better match stream D-excess. This *should* drive an
+# increase in non-fractionating land-atmosphere fluxes...namely I and T, which I
+# think is what we've been seeing.
+
+# I think the biggest concern is the soil evap prior from ERA5...those just are
+# not plausible values. We should triple check their derivation, maybe trying to
+# do a basic mass balance using the ERA data (i.e., check that w/in a grid cell
+# P = Q + Esurf + Esoil + T + I using the values from ERA5 just to confirm that
+# nothing is being double-counted here). If they add up, then maybe we need to 
+# think about alternative approaches to specifying the priors on E. 

@@ -2,6 +2,7 @@
 # R-code for the Manuscript 'Blue-green water partitioning depends on river-network position'
 # Submitted to Science
 # Authors: K.G. Brennan1*, R. Smith2†, S.R. Brennan3‡, J.R. Brooks4,6‡, S.P. Good5,6‡ G.J. Bowen1†
+# Corresponding Author: K.G. Brennan kyle.brennan@utah.edu
 # Bayesian isotope water-mass-balance (MRB) — methods-aligned, reproducible
 # Maps directly to Methods Eq. (3)–(15)
 # ------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 # ==============================================================================
-# Blue and green water partitioning in river basins — SSN driver workflow
+# R-code for the Manuscript 'Blue-green water partitioning depends on river-network position'
 # Manuscript: Submitted to Science
 # Authors: K.G. Brennan1*, R. Smith2†, S.R. Brennan3‡, J.R. Brooks4,6‡, S.P. Good5,6‡, G.J. Bowen1†
 #

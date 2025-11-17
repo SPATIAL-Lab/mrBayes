@@ -2,7 +2,7 @@
 # Mississippi River Basin (MRB) — SSN Build (HPC/CHPC)
 # Author: K.G. Brennan (2023–2025)
 #
-# R-code for the Manuscript 'Blue and green water partitioning in river basins'
+# R-code for the Manuscript 'Blue-green water partitioning depends on river-network position'
 # Submitted to Science
 # Authors: K.G. Brennan1*, R. Smith2†, S.R. Brennan3‡, J.R. Brooks4,6‡, S.P. Good5,6‡ G.J. Bowen1†
 #

@@ -62,7 +62,6 @@ base_dir <- "/PATH/TO/UNZIPPED/zenodo_17545916/mrb.rivFcopy/"    # <-- EDIT
 # GRASS GIS binary (update to your local install; example shown)
 # On CHPC, keep your original path; on a typical Linux/macOS install, this might be
 # something like "/usr/bin/grass82" or "C:/OSGeo4W64/apps/grass/grass82/grass82.bat"
-grass_program_path <- "/uufs/chpc.utah.edu/sys/spack/v019/linux-rocky8-nehalem/gcc-8.5.0/grass-8.2.0-gbujckpegjrc6y3xne5ubsrz3zoetpfu/grass82"
 # grass_program_path <- "/usr/bin/grass82"   # example local override
 
 # Working directories (scratch + GRASS database)

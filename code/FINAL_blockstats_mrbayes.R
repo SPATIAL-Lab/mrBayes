@@ -1,12 +1,12 @@
 # =============================================================================
 # Mississippi River Basin (MRB) — SSN Build (HPC/CHPC)
-# Corresponding Author: K.G. Brennan kyle.brennan@utah.edu
+# Corrisponding Author: K.G. Brennan kyle.brennan@utah.edu
 #
 # R-code for the Manuscript 'Blue-green water partitioning depends on river-network position'
 # Submitted to Science
 # Authors: K.G. Brennan1*, R. Smith2†, S.R. Brennan3‡, J.R. Brooks4,6‡, S.P. Good5,6‡ G.J. Bowen1†
 
-# Group-level tests (draw-aware) for Great Plains (GP) vs Eastern Basin × (HW/MS)
+# Group-level tests (draw-aware) for Great Plains (GP) vs Eastern Basiin × (HW/MS)
 # Keeps: (1) Posterior Group Contrasts (PGC) and (2) Draw-aware blocked permutations
 # Plus: ECDF panels and shift-function plots from per-reach posterior medians
 
@@ -47,7 +47,7 @@ suppressPackageStartupMessages({
 })
 
 # ─────────────────────────────────────────
-# 0) User paths: point to unzipped Zenodo folder
+# 1) User paths: point to unzipped Zenodo folder
 # ─────────────────────────────────────────
 
 zenodo_doi <- "10.5281/zenodo.17545916"
@@ -56,8 +56,8 @@ zenodo_doi <- "10.5281/zenodo.17545916"
 # Set base_dir to the folder created when you unzip the Zenodo archive.
 #
 # Example (macOS):
-# base_dir <- "/Users/yourname/Downloads/mrb.rivFcopy/"
-base_dir <- "/PATH/TO/UNZIPPED/mrb.rivFcopy/"   # <-- EDIT
+# base_dir <- "/Users/yourname/Downloads/zenodo.17545916FILE"
+base_dir <- "/PATH/TO/UNZIPPED/ZENODO/FILE"   # <-- EDIT
 
 if (!dir.exists(base_dir)) {
   stop("`base_dir` does not exist. Set it to the folder created by unzipping the Zenodo archive (DOI 10.5281/zenodo.17545916).")
@@ -75,6 +75,7 @@ midmrb      <- readRDS(file.path(base_dir, "midmrb.RDS"))
 
 GP_raw      <- readRDS(file.path(base_dir, "GP_raw.RDS"))
 mrb_polygon <- readRDS(file.path(base_dir, "mergedMRBpoly.RDS"))
+
 
 # ─────────────────────────────────────────
 # 2) Build region polygons in the streams CRS
@@ -456,5 +457,6 @@ print(p_shift_all)
 # End of workflow. Report Δ (CrI, Pr(Δ>0)) and permutation p-values.
 # Figures: ECDF and shift plots (HW vs MS facets) to show distributional structure.
 # =============================================================================
+
 
 

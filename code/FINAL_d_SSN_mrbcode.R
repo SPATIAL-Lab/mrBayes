@@ -70,7 +70,7 @@ set.seed(20251020)
 # 2) Set `base_dir` to the unzipped folder.
 #
 # Example (macOS):
-# base_dir <- "/Users/yourname/Downloads/mrb.rivFcopy/"
+# base_dir <- "/Users/yourname/Downloads/zenodo_file_name"
 base_dir <- "/PATH/TO/UNZIPPED/zenodo_17545916/"   # <-- EDIT THIS
 
 if (!dir.exists(base_dir)) {
@@ -104,14 +104,12 @@ final_formula <- d_ex ~ rh13_c + avElev_c + dppt13_c
 # ------------------------------------------------------------------------------
 # Point to your SSN dataset (choose local or high computing server (e.g., CHPC) paths)
 use_chpc <- FALSE
-# Example of local path (DELET IN FINAL CODE on GITHUB repo)
-ssn_path <- "/Users/kylebrennan/Documents/MissRiv_Project/MisRiv_R/missriv/missbigdata/mrb_SSNs/mrbevap.ssn" 
 
 # Additive (ERA5-Land runoff-based AFV) used in tail-up models
-# is  "afvH2oArea" but can use "afvro" for runoff weight, yields same results
+# is  "afvH2oArea" but can use "afvro" for runoff weight, yields the same results
 
 # ==== KNOWN FINAL MODEL (used in SECTION B) ===================================
-# from high computing global model selection, but must hard code these below 
+# from high computing global model selection, but must hard-code these below 
 #final_tailup  <- "mariah"          
 #final_family  <- "Gaussian"
 #final_euclid  <- "gaussian"
@@ -305,7 +303,7 @@ final_ml <- SSN2::ssn_glm(
 augmented_data <- augment(final_ml)
 # Check the structure to understand what's been added (e.g., .resid, .fitted)
 str(augmented_data)
-# Calculate standardized residuals
+# Calculate standardised residuals
 augmented_data$.stdresid <- with(augmented_data, .resid / sd(.resid))
 boxplot(augmented_data$.stdresid)
 # Identify outliers using quantiles
@@ -324,7 +322,7 @@ print(paste("LOOCV RMSE:", rmse_loocv))
 # Calculate R-squared
 r_squared_loocv <- cor(observed_loocv, predicted_loocv, use = "complete.obs")^2
 print(paste("LOOCV R^2:", r_squared_loocv))
-#remove outlires then re run model 
+#remove outliers, then re-run the model 
 # Set 'd_ex' values to NA for outliers in 'mrbssnTrans$obs'
 mrbssnOR <- mrbssn
 mrbssnOR$obs$d_ex[outlier_indices] <- NA
@@ -340,7 +338,7 @@ final_ml_refit <- SSN2::ssn_glm(
   estmethod   = "ml"
 )
 
-#leave-one-out cross validation with final model
+#leave-one-out cross-validation with the final model
 loocv_Fmod <- loocv(final_ml_refit, cv_predict = TRUE)
 # After LOOCV, calculate RMSE or other performance metrics if not directly available
 observed_loocv <- mrbssnOR$obs$d_ex[!is.na(mrbssnOR$obs$d_ex)]
@@ -400,15 +398,12 @@ stopifnot(all(req_bayes_cols %in% names(dstreams_bay)))
 
 #Save your dstreams_bay object locally
 dstreams_rds_path <- file.path(new_dstreams_dir, "dstreams_bay.RDS")
-dstreams_csv_path <- file.path(new_dstreams_dir, "dstreams_bay.csv")
 
 saveRDS(dstreams_bay, dstreams_rds_path)
-write.csv(dstreams_bay, dstreams_csv_path, row.names = FALSE)
 
 message(
   "Production complete: wrote\n  ",
   dstreams_rds_path, "\n  ",
-  dstreams_csv_path, "\n(",
   nrow(dstreams_bay), " edges)."
 )
 

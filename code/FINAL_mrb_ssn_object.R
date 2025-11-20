@@ -1,5 +1,5 @@
 # ==============================================================================
-# Mississippi River Basin (MRB) — SSN Build (HPC/CHPC)
+# Mississippi River Basin (MRB) — SSN Build [might require a high computing system (HPS)]
 # Corresponding Author: K.G. Brennan kyle.brennan@utah.edu
 #
 # R-code for the Manuscript 'Blue-green water partitioning depends on river-network position'
@@ -29,12 +29,16 @@
 #
 # Output:
 #   <ssnbler_root>/mrbevap.ssn  (used by SSN2 in FINAL_d_SSN_mrbcode.R)
+#
+# Resources:
+# SSN2 package see https://cran.r-project.org/web/packages/SSN2/index.html 
+# openSTARS package see https://github.com/MiKatt/openSTARS
 # ==============================================================================
 
 cat("Setting up library paths and loading packages...\n")
 #set to your library path
-## Optional: CHPC-specific library path (comment out on non-CHPC systems)
-# .libPaths("/uufs/chpc.utah.edu/common/home/u0549548/R/x86_64-redhat-linux-gnu-library/4.3")
+## Optional: HCS-specific library path (comment out on non-HCS systems)
+# .libPaths("<YOUR_R_LIB_PATH>")
 
 suppressPackageStartupMessages({
   library(sf)
@@ -60,7 +64,7 @@ base_dir <- "/PATH/TO/UNZIPPED/zenodo_17545916/mrb.rivFcopy/"    # <-- EDIT
 
 
 # GRASS GIS binary (update to your local install; example shown)
-# On CHPC, keep your original path; on a typical Linux/macOS install, this might be
+# On a high computing system, keep your original path; on a typical Linux/macOS install, this might be
 # something like "/usr/bin/grass82" or "C:/OSGeo4W64/apps/grass/grass82/grass82.bat"
 # grass_program_path <- "/usr/bin/grass82"   # example local override
 
@@ -75,7 +79,9 @@ dem_path     <- file.path(base_dir, "dem_mrb250m.tif")
 sites_path   <- file.path(base_dir, "mrbsites.shp")
 streams_path <- file.path(base_dir, "HydroRivOrd4.shp")
 
-# Prediction points (midpoints) will be generated below and saved here:
+# Prediction points (midpoints) can be generated below, 
+# requiring not including pred_paths first, followed by a re-run with inclusion.
+# or you can hard-code a path here from base_dir:
 preds_path   <- file.path(base_dir, "midpoints.shp")
 
 # Raster predictors (annual means/sums/SD; see Methods covariates list)
@@ -222,10 +228,8 @@ cat("Computing precipitation (m3) attributes...\n")
 calc_attributes_edges(input_raster = "ppt_m3", stat_rast = "sum",  attr_name_rast = "pptS_m3", round_dig = 4)
 calc_attributes_edges(input_raster = "ppt_m3", stat_rast = "mean", attr_name_rast = "pptA_m3", round_dig = 4)
 
-# Runoff (GRUN & ERA), and uncertainty
-cat("Computing runoff attributes (GRUN/ERA) and uncertainty...\n")
-calc_attributes_edges(input_raster = "grun",   stat_rast = "sum",  attr_name_rast = "grunS_m3", round_dig = 4)
-calc_attributes_edges(input_raster = "grun",   stat_rast = "mean", attr_name_rast = "grunA_m3", round_dig = 4)
+# Runoff (ERA5-land), and uncertainty
+cat("Computing runoff attributes (ERA) and uncertainty...\n")
 calc_attributes_edges(input_raster = "q_era",  stat_rast = "sum",  attr_name_rast = "q_eraS",   round_dig = 4)
 calc_attributes_edges(input_raster = "q_era",  stat_rast = "mean", attr_name_rast = "q_eraA",   round_dig = 4)
 calc_attributes_edges(input_raster = "q_sd",   stat_rast = "sum",  attr_name_rast = "q_sdS",    round_dig = 4)
@@ -367,7 +371,7 @@ site.list <- afv_sites(sites = site.list, edges = edges, afv_col = "afvH2oArea",
 
 # ------------------------------------------------------------------------------
 # 7) Assemble SSN object (edges + observed + prediction points)
-#    (Methods: produces the .ssn used in SSN2 modeling and prediction)
+#    (Methods: produces the .ssn used in SSN2 modelling and prediction)
 # ------------------------------------------------------------------------------
 
 cat("Assembling SSN object...\n")

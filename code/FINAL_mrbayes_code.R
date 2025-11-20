@@ -234,7 +234,6 @@ model {
     d_riv_mod[i] <- d_rca_in[i] + cap_d_surf[i]
 
     # Water balance for runoff normalized by P       [from Eqs. (3) & (8)]
-    # Q_r_norm = (Q_in/P) + CWF + MWF - Esurf
     Q_r[i] <- (Q_in[i] / P_rca[i]) + CWF[i] + MWF[i] - Esurf[i]
   }
 
@@ -301,6 +300,10 @@ if (length(avail_core)) {
   print(gelman.diag(mcmc_samples[, avail_core, drop = FALSE], multivariate = FALSE)$psrf)
 }
 
+# Parameter–manuscript mapping:
+# I, BWF, MWF, CWF, Esoil, and Esurf denote, respectively, the fractions of
+# catchment precipitation going to interception, bound water, mobile water,
+# connected water, soil evaporation, and surface evaporation. 
 
 # Convert MCMC samples to a matrix
 posterior_matrix <- as.matrix(mcmc_samples)

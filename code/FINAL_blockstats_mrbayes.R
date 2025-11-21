@@ -1,12 +1,12 @@
 # =============================================================================
 # Mississippi River Basin (MRB) — SSN Build (HPC/CHPC)
-# Corrisponding Author: K.G. Brennan kyle.brennan@utah.edu
+# Corresponding Author: K.G. Brennan kyle.brennan@utah.edu
 #
 # R-code for the Manuscript 'Blue-green water partitioning depends on river-network position'
 # Submitted to Science
 # Authors: K.G. Brennan1*, R. Smith2†, S.R. Brennan3‡, J.R. Brooks4,6‡, S.P. Good5,6‡ G.J. Bowen1†
 
-# Group-level tests (draw-aware) for Great Plains (GP) vs Eastern Basiin × (HW/MS)
+# Group-level tests (draw-aware) for Great Plains (GP) vs Eastern Basin × (HW/MS)
 # Keeps: (1) Posterior Group Contrasts (PGC) and (2) Draw-aware blocked permutations
 # Plus: ECDF panels and shift-function plots from per-reach posterior medians
 

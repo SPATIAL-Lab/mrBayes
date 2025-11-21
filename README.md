@@ -1,7 +1,7 @@
 # mrBayes
 Code for manuscript on blue-green water partitioning of the Mississippi River Basin (MRB). 
 
-### Code/
+### code/
 #
 - **FINAL_mrb_ssn_object.R** Builds spatial stream network for d-excess 
 - **FINAL_d_SSN_mrbcode.R** Builds spatial stream network model for d-excess 

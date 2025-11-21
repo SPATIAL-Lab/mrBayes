@@ -6,7 +6,9 @@
 # ==============================================================================
 
 ## ---- 1) Load posterior and ensure matrix ------------------------------------
-post <- readRDS("path/to/posterior_matrix.RDS")
+# # Inputs (posterior_matrix.RDS) are archived on Zenodo:
+#   DOI: 10.5281/zenodo.17545916 must download and unzip or run FINAL_mrbayes_code.R script to generate.
+post <- readRDS("/PATH/TO/UNZIPPED/zenodo_17545916/posterior_matrix.RDS")   # <-- EDIT THIS
 post <- posterior_matrix
 ## ---- 2) Helpers --------------------------------------------------------------
 # Extract all columns for an indexed parameter (e.g., "BWF[1]", "BWF[2]", ...)

@@ -17,6 +17,7 @@ Data & folders only on doi:10.5281/zenodo.17545916
 - **mrb.rivFcopy.zip** File for data used to build spatial stream network
 - **mrbevap.ssn.zip** Final MRB Landscape Stream Network file for spatial stream network model
 - **posterior_matrix.rds** Posterior matrix from MCMC sample parameters via MRB Bayesian isotope mass balance model
+- **dstreams_bay_extended.RDS** MRB stream network with Bayesian isotope mass balance model component summary statistics
 
 
 Data on mrBayes GitHub repository and doi:10.5281/zenodo.17545916

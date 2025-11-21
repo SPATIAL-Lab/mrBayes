@@ -10,7 +10,13 @@ Code for manuscript on blue-green water partitioning of the Mississippi River Ba
 - **FINAL_blockstats_mrbayes.R** Code tests if spatial patterns persist if posterior uncertainty is propagated
 ### data/ 
 #
-Data file must be downloaded from doi:10.5281/zenodo.17545916
+All data files can be downloaded from doi:10.5281/zenodo.17545916
+
+Data folders only on doi:10.5281/zenodo.17545916
+- **mrb.rivFcopy.zip** File for data used to build spatial stream network
+- **mrbevap.ssn.zip** Final MRB Landscape Stream Network file for spatial stream network model
+
+Data on mrBayes GitHub repository and doi:10.5281/zenodo.17545916
 - **dstreams_bay.RDS** spatial stream network for d-excess
 - **GP_raw.RDS** Great Plains polygon [EPA's SDAM GP](https://sdam-for-great-plains-eprusa.hub.arcgis.com](https://sdam-for-great-plains-eprusa.hub.arcgis.com/))
 - **lowmrb.RDS** Lower MRB watershed polygon [HydroBASINS](https://www.hydrosheds.org/products/hydrobasins#downloads)
@@ -19,6 +25,5 @@ Data file must be downloaded from doi:10.5281/zenodo.17545916
 - **uppermrbbas.RDS** Upper MRB watershed polygon [HydroBASINS](https://www.hydrosheds.org/products/hydrobasins#downloads)
 - **midlowmrb.RDS** Middle-Lower MRB watershed polygon [HydroBASINS](https://www.hydrosheds.org/products/hydrobasins#downloads)
 - **mergedMRBpoly.RDS** MRB watershed polygon [HydroBASINS](https://www.hydrosheds.org/products/hydrobasins#downloads)
-- **mrb.rivFcopy.zip** File for data used to build spatial stream network 
 - **posterior_matrix.rds** Posterior matix for MRB Bayesian isotope mass balance model
-- **mrbevap.ssn.zip** Final MRB Landscape Stream Network file for spatial stream network model
+

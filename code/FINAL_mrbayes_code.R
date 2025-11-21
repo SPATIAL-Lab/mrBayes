@@ -363,7 +363,7 @@ out_list <- lapply(params_to_save, function(p) summarize_param_mat(s_all, p))
 summ_tbl <- dplyr::bind_rows(Filter(Negate(is.null), out_list))
 summ_tbl
 
-
+# Simplify 
 mrb <- dstreams_bay %>% select(geometry, rid)
 
 
@@ -403,48 +403,45 @@ tm_shape(mrb_aug) +
 
 # --- 2) build a  data frame with observed values -------------------------
 
-ds <- dstreams_bay #optionally you can save & load this from repository
-
-df <- tibble(
-  d_mod     = d_mod,
-  Q_mod_abs = Q_mod_abs,
-  d_obs     = ds$dex_riv_pred,   # observed d_river (‰)
-  Q_obs_abs = ds$q_eraS_c        # observed Q_river (m^3/yr)
-) |> drop_na()
+df <- wide_all %>%
+  transmute(
+    rid,
+    # absolute river runoff (m3/yr)
+    Q_obs_abs = Q_r_obs_q500 * P_rca_q500,
+    Q_mod_abs = Q_r_q500     * P_rca_q500,
+    # d-excess (‰)
+    d_obs = d_riv_obs_q500,
+    d_mod = d_riv_mod_q500
+  ) %>%
+  filter(is.finite(Q_obs_abs),
+         is.finite(Q_mod_abs),
+         is.finite(d_obs),
+         is.finite(d_mod))
 
 # --- 3A) super-simple base R version -----------------------------------------
-op <- par(mfrow = c(1,2), mar = c(4,4,1,1))
+op <- par(mfrow = c(1, 2), mar = c(4, 4, 1, 1))
 
-plot(wide_all$Q $Q_obs_abs, df$Q_mod_abs, pch=16, cex=.6, col=rgb(0,0,1,.3),
-     xlab=expression(Observed~Q[river]~(m^3~yr^{-1})),
-     ylab=expression(Modeled~Q[river]~(m^3~yr^{-1})))
-abline(0, 1, col="red", lty=2)
+## Q: observed vs modeled
+plot(df$Q_obs_abs, df$Q_mod_abs,
+     pch = 16, cex = 0.6, col = rgb(0, 0, 1, 0.3),
+     xlab = expression(Observed~Q[river]~(m^3~yr^{-1})),
+     ylab = expression(Modeled~Q[river]~(m^3~yr^{-1})))
+abline(0, 1, col = "red", lty = 2)
 
-plot(df$d_obs, df$d_mod, pch=16, cex=.6, col=rgb(0,0,1,.3),
-     xlab=expression(Observed~italic(d)[river]~("\u2030")),
-     ylab=expression(Modeled~italic(d)[river]~("\u2030")))
-abline(0, 1, col="red", lty=2)
+## d-excess: observed vs modeled
+plot(df$d_obs, df$d_mod,
+     pch = 16, cex = 0.6, col = rgb(0, 0, 1, 0.3),
+     xlab = expression(Observed~italic(d)[river]~("\u2030")),
+     ylab = expression(Modeled~italic(d)[river]~("\u2030")))
+abline(0, 1, col = "red", lty = 2)
 
 par(op)
 
-# (optional) quick R^2
-cat("R2(Q):", summary(lm(Q_mod_abs ~ Q_obs_abs, df))$r.squared, "\n")
-cat("R2(d):", summary(lm(d_mod ~ d_obs, df))$r.squared, "\n")
 
+# ---- Optional R² diagnostics ----------------------------------------------
+mod_Q <- lm(Q_mod_abs ~ Q_obs_abs, data = df)
+mod_d <- lm(d_mod ~ d_obs,       data = df)
 
-pA <- ggplot(df, aes(Q_obs_abs, Q_mod_abs)) +
-  geom_point(color="blue", alpha=.35, size=1.1) +
-  geom_abline(slope=1, intercept=0, linetype="dashed", color="red") +
-  coord_equal() + theme_classic() +
-  labs(x = expression(Observed~Q[river]~(m^3~yr^{-1})),
-       y = expression(Modeled~Q[river]~(m^3~yr^{-1})))
-
-pB <- ggplot(df, aes(d_obs, d_mod)) +
-  geom_point(color="blue", alpha=.35, size=1.1) +
-  geom_abline(slope=1, intercept=0, linetype="dashed", color="red") +
-  coord_equal() + theme_classic() +
-  labs(x = expression(Observed~italic(d)[river]~("\u2030")),
-       y = expression(Modeled~italic(d)[river]~("\u2030")))
-
-ggarrange(pA, pB, labels = c("A","B"), ncol = 2)
+cat("R²(Q):", signif(summary(mod_Q)$r.squared, 3), "\n")
+cat("R²(d):", signif(summary(mod_d)$r.squared, 3), "\n")
 

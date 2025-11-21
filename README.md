@@ -8,6 +8,7 @@ Code for manuscript on blue-green water partitioning of the Mississippi River Ba
 - **FINAL_mrbayes_code.R** Code for Bayesian isotope mass balance model 
 - **MRBayes_sumstats.R** Code for calculating ecohydrologic component summary statistics
 - **FINAL_blockstats_mrbayes.R** Code tests if spatial patterns persist if posterior uncertainty is propagated
+- **FINAL_blue-green_bi-plots.R** Code builds regional headwater vs downstream blue-green bivariate plots
 ### data/ 
 #
 All data files can be downloaded from doi:10.5281/zenodo.17545916

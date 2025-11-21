@@ -25,7 +25,7 @@ Data on mrBayes GitHub repository and doi:10.5281/zenodo.17545916
 - **uppermrbbas.RDS** Upper MRB watershed polygon [HydroBASINS](https://www.hydrosheds.org/products/hydrobasins#downloads)
 - **midlowmrb.RDS** Middle-Lower MRB watershed polygon [HydroBASINS](https://www.hydrosheds.org/products/hydrobasins#downloads)
 - **mergedMRBpoly.RDS** MRB watershed polygon [HydroBASINS](https://www.hydrosheds.org/products/hydrobasins#downloads)
-- **posterior_matrix.rds** Posterior matix for MRB Bayesian isotope mass balance model
+- **posterior_matrix.rds** Posterior matrix from MCMC sample parameters via MRB Bayesian isotope mass balance model
 
 ### out/
 #

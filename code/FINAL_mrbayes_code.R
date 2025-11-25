@@ -257,7 +257,7 @@ jags_model <- jags.model(
   n.adapt   = 2000
 )
 
-update(jags_model, n.iter = 1000)  # burn-in
+update(jags_model, n.iter = 10000)  # burn-in - increase to improve convergence Heavy Memory required
 
 # Hash or un-hash parameters you want to evaluate
 keep_vars <- c(
@@ -274,7 +274,7 @@ keep_vars <- c(
 mcmc_samples <- coda.samples(
   jags_model,
   variable.names = keep_vars,
-  n.iter = 1000, #increase to improve convergence Heavy Memory reqired
+  n.iter = 3000, #increase to improve convergence Heavy Memory required
   thin   = 10
 )
 

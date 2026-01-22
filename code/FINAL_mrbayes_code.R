@@ -51,18 +51,16 @@ if (!has_jags) {
   )
 }
 
-# --- User settings -------------------------------------------------------------
-# --- User path settings -------------------------------------------------------
-# Data for this script (dstreams_bay.RDS) are archived on Zenodo:
-#   DOI: 10.5281/zenodo.17545916
+# --- Data location -------------------------------------------------------------
+# This script requires `dstreams_bay.RDS`.
+# You can obtain it either by:
+#   (A) cloning the GitHub repository (file is in ./data/), OR
+#   (B) downloading the dataset from Zenodo (DOI: 10.5281/zenodo.17545916) and unzipping it.
 #
-# 1) Download and unzip the Zenodo archive.
-# 2) Ensure that `dstreams_bay.RDS` is present in the chosen folder
-#    (e.g., created by the dstreams_bay build script in `new_dstreams_bay_file/`).
-# 3) Set `base_dir` below to that unzipped folder.
-
-# Example (macOS):
-# base_dir <- "/Users/yourname/Downloads/zenodo_17545916/"
+# Set `base_dir` to the folder that CONTAINS dstreams_bay.RDS (not the file itself).
+# Example:
+# base_dir <- "data"  # if using the GitHub repo as-is
+# base_dir <- "/Users/yourname/Downloads/zenodo_17545916/"  # if using Zenodo download
 base_dir <- "/PATH/TO/UNZIPPED/zenodo_17545916/"  # <-- EDIT THIS
 
 if (!dir.exists(base_dir)) {
@@ -82,7 +80,7 @@ if (!file.exists(dstreams_path)) {
        "from the Zenodo download into this location.")
 }
 
-# Load if you want to use saved dstreams_bay from FINAL_d_ssn_mrbcod.R script
+# Load if you want to use saved dstreams_bay from FINAL_d_ssn_mrbcode.R script
 # dstreams_bay <- readRDS(dstreams_path)
 
 set.seed(20251020)

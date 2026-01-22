@@ -38,7 +38,7 @@
 # =============================================================================
 req_pkgs <- c(
   "sf","dplyr","tidyr","purrr","stringr",
-  "ggplot2","matrixStats","future"
+  "ggplot2","matrixStats","future","tibble"
 )
 
 for (p in req_pkgs) {
@@ -56,6 +56,7 @@ suppressPackageStartupMessages({
   library(ggplot2)
   library(matrixStats)
   library(future)
+  library(tibble)
 })
 
 # ─────────────────────────────────────────

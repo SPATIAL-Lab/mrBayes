@@ -69,8 +69,9 @@ if (!dir.exists(base_dir)) {
 }
 
 # Path to dstreams_bay.RDS; adjust if you keep it directly in base_dir
-# or inside a subfolder like 'new_dstreams_bay_file'.
-#dstreams_path <- file.path(base_dir, "new_dstreams_bay_file", "dstreams_bay.RDS")
+# or inside a subfolder created if you run FINAL_d_SSN_mrbcode.R script
+# i.e., 'new_dstreams_bay_file'
+# dstreams_path <- file.path(base_dir, "new_dstreams_bay_file", "dstreams_bay.RDS")
 # If you store it directly in base_dir, use instead:
 # dstreams_path <- file.path(base_dir, "dstreams_bay.RDS")
 

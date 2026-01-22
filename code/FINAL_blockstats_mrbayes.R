@@ -21,7 +21,7 @@
 #   After access approval, download the archive from Zenodo, unzip it locally,
 #   and set `base_dir` below to the unzipped folder containing the .RDS files.
 #
-#   1) Download the Zenodo archive (e.g., mrb.rivFcopy.zip).
+#   1) Download the Zenodo archive (DOI: 10.5281/zenodo.17545916).
 #   2) Unzip it to a folder on your system.
 #   3) Set `base_dir` (below) to that unzipped folder.
 #

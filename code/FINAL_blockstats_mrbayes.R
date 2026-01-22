@@ -14,10 +14,12 @@
 # Group-level contrasts (Great Plains vs East; HW vs MS)
 # for "Blue and green water partitioning in river basins"
 #
-# Data availability:
-#   Required inputs (streams, polygons, posterior draws) are archived on Zenodo:
+# # Data availability:
+#   Required inputs are archived on Zenodo under restricted access:
+#     DOI: 10.5281/zenodo.17545916
 #
-#       DOI: 10.5281/zenodo.17545916
+#   After access approval, download the archive from Zenodo, unzip it locally,
+#   and set `base_dir` below to the unzipped folder containing the .RDS files.
 #
 #   1) Download the Zenodo archive (e.g., mrb.rivFcopy.zip).
 #   2) Unzip it to a folder on your system.
@@ -62,6 +64,28 @@ base_dir <- "/PATH/TO/UNZIPPED/ZENODO/FILE"   # <-- EDIT
 if (!dir.exists(base_dir)) {
   stop("`base_dir` does not exist. Set it to the folder created by unzipping the Zenodo archive (DOI 10.5281/zenodo.17545916).")
 }
+
+required_files <- c(
+  "dstreams_bay.RDS",
+  "posterior_matrix.rds",
+  "ohiobas.RDS",
+  "uppermrbbas.RDS",
+  "lowmrb.RDS",
+  "midlowmrb.RDS",
+  "midmrb.RDS",
+  "GP_raw.RDS",
+  "mergedMRBpoly.RDS"
+)
+
+missing <- required_files[!file.exists(file.path(base_dir, required_files))]
+if (length(missing) > 0) {
+  stop(
+    "Missing required files in base_dir:\n  - ", paste(missing, collapse = "\n  - "), "\n\n",
+    "Zenodo DOI: ", zenodo_doi, " (restricted access)\n",
+    "After approval, unzip the Zenodo archive and set base_dir to the folder containing these files."
+  )
+}
+
 
 # Core inputs: all assumed to be directly in base_dir
 dstreams_s       <- readRDS(file.path(base_dir, "dstreams_bay.RDS"))

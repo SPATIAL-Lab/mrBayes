@@ -1,8 +1,8 @@
 # =============================================================================
 # MRBAYES POSTERIOR SUMMARIES & BLUE–GREEN WATER BIVARIATE PLOTS
 # -----------------------------------------------------------------------------
-# R-code for the Manuscript 'Blue-green water partitioning depends on river-network position'
-# Submitted to Science
+# R-code for the Manuscript 'Interactive effects of aridity and catchment position on blue-green water partitioning across river networks'
+# Submitted to Nature
 # Authors: K.G. Brennan1*, R. Smith2†, S.R. Brennan3‡, J.R. Brooks4,6‡, S.P. Good5,6‡ G.J. Bowen1†
 # Corrisponding author: K.G. Brennan - kyle.brennan@utah.edu
 #

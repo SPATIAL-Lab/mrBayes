@@ -36,6 +36,16 @@
 #   GP_raw.RDS
 #   mergedMRBpoly.RDS
 # =============================================================================
+req_pkgs <- c(
+  "sf","dplyr","tidyr","purrr","stringr",
+  "ggplot2","matrixStats","future"
+)
+
+for (p in req_pkgs) {
+  if (!requireNamespace(p, quietly = TRUE)) {
+    install.packages(p, repos = "https://cloud.r-project.org")
+  }
+}
 
 suppressPackageStartupMessages({
   library(sf)

@@ -55,41 +55,33 @@ library(scales)      # alpha()
 
 options(ggplot2.useDingbats = FALSE)
 
-ensure_zenodo_record <- function(doi = "10.5281/zenodo.17545916", base_dir = "data") {
-  if (!dir.exists(base_dir)) dir.create(base_dir, recursive = TRUE)
 
-  # record id is the numeric suffix for Zenodo DOIs like 10.5281/zenodo.<id>
-  rec_id <- sub("^.*zenodo\\.(\\d+)$", "\\1", doi)
+# ----------------------------------------------------------------------------- 
+# 2) Load core inputs (streams + posterior matrix)
+#    NOTE: Zenodo record (DOI: 10.5281/zenodo.17545916) is RESTRICTED.
+#    Users must obtain access via Zenodo and place the unzipped files in `base_dir`.
+# -----------------------------------------------------------------------------
 
-  api_url <- paste0("https://zenodo.org/api/records/", rec_id)
+required_files <- c(
+  "dstreams_bay.RDS",
+  "posterior_matrix.rds",
+  "ohiobas.RDS", "uppermrbbas.RDS", "lowmrb.RDS", "midlowmrb.RDS", "midmrb.RDS",
+  "GP_raw.RDS",
+  "mergedMRBpoly.RDS"
+)
 
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("Please install 'jsonlite' (or add it to your capsule environment).")
-  }
+missing <- required_files[!file.exists(file.path(base_dir, required_files))]
 
-  rec <- jsonlite::fromJSON(api_url)
-
-  if (is.null(rec$files) || nrow(rec$files) == 0) {
-    stop("No files returned from Zenodo API. If the record is restricted, this will fail without auth.")
-  }
-
-  for (i in seq_len(nrow(rec$files))) {
-    key <- rec$files$key[i]
-    url <- rec$files$links$self[i]
-    dest <- file.path(base_dir, key)
-
-    if (!file.exists(dest) || file.info(dest)$size == 0) {
-      message("Downloading: ", key)
-      download.file(url, destfile = dest, mode = "wb", quiet = TRUE)
-    }
-  }
+if (length(missing) > 0) {
+  stop(
+    "Required data files not found in `base_dir` = '", base_dir, "'.\n",
+    "Missing:\n  - ", paste(missing, collapse = "\n  - "), "\n\n",
+    "Data are archived on Zenodo under restricted access (DOI: 10.5281/zenodo.17545916).\n",
+    "After obtaining access, download and unzip the archive, then place the files in:\n",
+    "  ", normalizePath(base_dir, winslash = "/", mustWork = FALSE), "\n"
+  )
 }
 
-ensure_zenodo_record("10.5281/zenodo.17545916", base_dir = base_dir)
-
-# -----------------------------------------------------------------------------
-# 2) Load core inputs (streams + posterior matrix)
-# -----------------------------------------------------------------------------
 dstreams_s <- readRDS(file.path(base_dir, "dstreams_bay.RDS"))
 posterior_matrix <- readRDS(file.path(base_dir, "posterior_matrix.rds"))
 

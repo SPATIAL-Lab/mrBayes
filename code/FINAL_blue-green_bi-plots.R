@@ -45,6 +45,18 @@ if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
 # -----------------------------------------------------------------------------
 # 1) Libraries
 # -----------------------------------------------------------------------------
+req_pkgs <- c(
+  "sf","dplyr","ggplot2","ggnewscale","MASS",
+  "patchwork","scales"
+)
+
+for (p in req_pkgs) {
+  if (!requireNamespace(p, quietly = TRUE)) {
+    install.packages(p, repos = "https://cloud.r-project.org")
+  }
+}
+
+
 library(dplyr)
 library(sf)
 library(ggplot2)

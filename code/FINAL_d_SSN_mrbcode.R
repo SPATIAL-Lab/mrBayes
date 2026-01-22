@@ -80,9 +80,7 @@ set.seed(20251020)
 # 1) Download and unzip the archive.
 # 2) Set `base_dir` to the unzipped folder.
 #
-# Example (macOS):
-# base_dir <- "/Users/yourname/Downloads/zenodo_file_name"
-base_dir <- "/PATH/TO/UNZIPPED/zenodo_17545916/"   # <-- EDIT THIS
+base_dir <- "/PATH/TO/UNZIPPED/zenodo_17545916/"   # <-- EDIT THIS (required)
 
 if (!dir.exists(base_dir)) {
   stop("`base_dir` does not exist. Set it to the folder created by unzipping the Zenodo archive (DOI 10.5281/zenodo.17545916).")

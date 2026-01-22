@@ -33,7 +33,6 @@
 #   - C_TEC_HW_MS_samescale_plots.pdf           (C /(T+Esoil+C) vs C/(C+M))
 # =============================================================================
 
-
 # -----------------------------------------------------------------------------
 # 0) User paths: base_dir (data from Zenodo) and out_dir (figures)
 # -----------------------------------------------------------------------------
@@ -56,15 +55,44 @@ library(scales)      # alpha()
 
 options(ggplot2.useDingbats = FALSE)
 
+ensure_zenodo_record <- function(doi = "10.5281/zenodo.17545916", base_dir = "data") {
+  if (!dir.exists(base_dir)) dir.create(base_dir, recursive = TRUE)
+
+  # record id is the numeric suffix for Zenodo DOIs like 10.5281/zenodo.<id>
+  rec_id <- sub("^.*zenodo\\.(\\d+)$", "\\1", doi)
+
+  api_url <- paste0("https://zenodo.org/api/records/", rec_id)
+
+  if (!requireNamespace("jsonlite", quietly = TRUE)) {
+    stop("Please install 'jsonlite' (or add it to your capsule environment).")
+  }
+
+  rec <- jsonlite::fromJSON(api_url)
+
+  if (is.null(rec$files) || nrow(rec$files) == 0) {
+    stop("No files returned from Zenodo API. If the record is restricted, this will fail without auth.")
+  }
+
+  for (i in seq_len(nrow(rec$files))) {
+    key <- rec$files$key[i]
+    url <- rec$files$links$self[i]
+    dest <- file.path(base_dir, key)
+
+    if (!file.exists(dest) || file.info(dest)$size == 0) {
+      message("Downloading: ", key)
+      download.file(url, destfile = dest, mode = "wb", quiet = TRUE)
+    }
+  }
+}
+
+ensure_zenodo_record("10.5281/zenodo.17545916", base_dir = base_dir)
 
 # -----------------------------------------------------------------------------
 # 2) Load core inputs (streams + posterior matrix)
 # -----------------------------------------------------------------------------
 dstreams_s <- readRDS(file.path(base_dir, "dstreams_bay.RDS"))
 posterior_matrix <- readRDS(file.path(base_dir, "posterior_matrix.rds"))
-#DELETE IN FINAL COPY*******
-dstreams_s <- readRDS("/Users/kylebrennan/Documents/MissRiv_Project/MisRiv_R/missriv/missout/dstreams_bay.RDS")
-posterior_matrix <- readRDS("/Users/kylebrennan/Documents/MissRiv_Project/MisRiv_R/missriv/posterior_matrix.rds")
+
 # Basic checks (expected columns in dstreams_s)
 req_cols <- c(
   "rh13_e","dppt13_e","dp_sd_e","dex_riv_pred","dex_riv_pred_SE",
@@ -166,8 +194,6 @@ if (ncol(BWF_samples) == nrow(dstreams_s) &&
 # Attach summaries back to stream object
 dstreams_s_extended <- cbind(dstreams_s, summary_df)
 
-#DELETE IN FINAL CODE DRAFT *******
-base_dir <- "/Users/kylebrennan/Documents/MissRiv_Project/MisRiv_R/missriv/missout"
 # -----------------------------------------------------------------------------
 # 4) Define Great Plains vs Eastern Basin subsets
 # -----------------------------------------------------------------------------

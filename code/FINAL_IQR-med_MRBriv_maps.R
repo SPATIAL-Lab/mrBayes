@@ -24,12 +24,40 @@
 #   f_cwf (fc) = fraction of B that connects to stream-reach discharge (C/B)
 #
 # # Inputs (dstreams_bay_extended.RDS) are archived on Zenodo:
-#   DOI: 10.5281/zenodo.17545916 must download, unzip, and set to base directory
+#   DOI: 10.5281/zenodo.17545916 MUST download, unzip, and set to base directory i.e., 'base_dir'
 # ------------------------------------------------------------------------------ 
 base_dir <- "/PATH/TO/UNZIPPED/zenodo_17545916/"   # <-- EDIT THIS
+
+# -----------------------------
+# 1) Install + load packages (if needed)
+# -----------------------------
+req_pkgs <- c("ggplot2", "dplyr", "sf", "viridis", "patchwork")
+
+for (p in req_pkgs) {
+  if (!requireNamespace(p, quietly = TRUE)) {
+    install.packages(p, repos = "https://cloud.r-project.org")
+  }
+}
+
+suppressPackageStartupMessages({
+  library(ggplot2)
+  library(dplyr)
+  library(sf)
+  library(viridis)
+  library(patchwork)
+})
+
+# -----------------------------
+# 2) Load data
+# -----------------------------
+
 dstreams_bay_extended <- readRDS(
   file.path(base_dir, "dstreams_bay_extended.RDS")
 )
+
+# -----------------------------
+# 3) Plot function 
+# -----------------------------
 
 plot_med_iqr_maps_discrete_quantiles <- function(param_name,
                                                  data,
@@ -37,11 +65,7 @@ plot_med_iqr_maps_discrete_quantiles <- function(param_name,
                                                  palette_mu  = "cividis",
                                                  palette_iqr = "cividis") {
   
-  library(ggplot2)
-  library(dplyr)
-  library(sf)
-  library(viridis)
-  library(patchwork)
+
   
   med_col <- paste0(param_name, "_med")
   iqr_col <- paste0(param_name, "_iqr")

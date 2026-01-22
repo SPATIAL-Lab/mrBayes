@@ -51,45 +51,32 @@ if (!has_jags) {
   )
 }
 
-# --- Data location -------------------------------------------------------------
+# --- Data input ---------------------------------------------------------------
 # This script requires `dstreams_bay.RDS`.
-# You can obtain it either by:
-#   (A) cloning the GitHub repository (file is in ./data/), OR
-#   (B) downloading the dataset from Zenodo (DOI: 10.5281/zenodo.17545916) and unzipping it.
+# Choose ONE of the following locations by editing `dstreams_path` below:
 #
-# Set `base_dir` to the folder that CONTAINS dstreams_bay.RDS (not the file itself).
-# Example:
-# base_dir <- "data"  # if using the GitHub repo as-is
-# base_dir <- "/Users/yourname/Downloads/zenodo_17545916/"  # if using Zenodo download
-base_dir <- "/PATH/TO/UNZIPPED/zenodo_17545916/"  # <-- EDIT THIS
-
-if (!dir.exists(base_dir)) {
-  stop("`base_dir` does not exist. Set it to the folder created by unzipping ",
-       "the Zenodo archive (DOI 10.5281/zenodo.17545916).")
-}
-
-# Path to dstreams_bay.RDS; adjust if you keep it directly in base_dir
-# or inside a subfolder created if you run FINAL_d_SSN_mrbcode.R script
-# i.e., 'new_dstreams_bay_dir'
-# dstreams_path <- file.path(base_dir, "new_dstreams_bay_dir", "dstreams_bay.RDS")
-# If you store it directly in base_dir, use instead:
-# dstreams_path <- file.path(base_dir, "dstreams_bay.RDS")
+#   (1) GitHub repository (default; fastest):
+#       "data/dstreams_bay.RDS"
+#
+#   (2) Zenodo download (after unzipping DOI: 10.5281/zenodo.17545916):
+#       "/PATH/TO/UNZIPPED/zenodo_17545916/dstreams_bay.RDS"
+#
+#   (3) Rebuilt SSN output (after running FINAL_d_SSN_mrbcode.R):
+#       "/PATH/TO/UNZIPPED/zenodo_17545916/new_dstreams_bay_file/dstreams_bay.RDS"
+#
+dstreams_path <- "data/dstreams_bay.RDS"   # <-- EDIT THIS to one of the above Data input options
 
 if (!file.exists(dstreams_path)) {
-  stop("dstreams_bay.RDS not found at: ", dstreams_path,
-       "\nMake sure you ran the dstreams_bay build script or copied the file ",
-       "from the Zenodo download into this location.")
+  stop(
+    "dstreams_bay.RDS not found at:\n  ", dstreams_path, "\n\n",
+    "Edit `dstreams_path` to point to one of the valid locations listed above.\n",
+    "Zenodo DOI: 10.5281/zenodo.17545916"
+  )
 }
 
-# Load if you want to use saved dstreams_bay from FINAL_d_ssn_mrbcode.R script
-# dstreams_bay <- readRDS(dstreams_path)
+dstreams_bay <- readRDS(dstreams_path)
 
 set.seed(20251020)
-
-# Load SSN-ready stream-catchment dataframe (from zenodo directory)
-dstreams_bay <- readRDS(
-  file.path(base_dir, "dstreams_bay.RDS")
-)
 
 # Basic checks (expected columns)
 req_cols <- c("rh13_e","dppt13_e","dp_sd_e","dex_riv_pred","dex_riv_pred_SE",

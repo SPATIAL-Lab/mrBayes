@@ -36,6 +36,10 @@
 # -----------------------------------------------------------------------------
 # 0) User paths: base_dir (data from Zenodo) and out_dir (figures)
 # -----------------------------------------------------------------------------
+#   1) Download the Zenodo archive (DOI: 10.5281/zenodo.17545916).
+#   2) Unzip it to a folder on your system.
+#   3) Set `base_dir` (below) to that unzipped folder.
+
 base_dir <- "/PATH/TO/UNZIPPED/ZENODO/17545916"  # <-- EDIT THIS (required)
 out_dir  <- "out"         # GitHub repo's output folder
 

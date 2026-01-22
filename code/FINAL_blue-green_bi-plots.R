@@ -36,7 +36,7 @@
 # -----------------------------------------------------------------------------
 # 0) User paths: base_dir (data from Zenodo) and out_dir (figures)
 # -----------------------------------------------------------------------------
-base_dir <- "data"        # change if your Zenodo data live elsewhere
+base_dir <- "/PATH/TO/UNZIPPED/ZENODO/17545916"  # <-- EDIT THIS (required)
 out_dir  <- "out"         # GitHub repo's output folder
 
 if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
@@ -70,8 +70,8 @@ options(ggplot2.useDingbats = FALSE)
 
 # ----------------------------------------------------------------------------- 
 # 2) Load core inputs (streams + posterior matrix)
-#    NOTE: Zenodo record (DOI: 10.5281/zenodo.17545916) is RESTRICTED.
-#    Users must obtain access via Zenodo and place the unzipped files in `base_dir`.
+# NOTE: Data are archived on Zenodo (DOI: 10.5281/zenodo.17545916).
+# Users should download and unzip the archive, then set `base_dir` accordingly.
 # -----------------------------------------------------------------------------
 
 required_files <- c(

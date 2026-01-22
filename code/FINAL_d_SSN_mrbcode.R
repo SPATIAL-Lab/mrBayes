@@ -45,6 +45,17 @@
 # CITATIONS
 # • Please cite SSN2, SSNbler, and GRASS/openSTARS where appropriate in the supplement.
 # ==============================================================================
+req_pkgs <- c(
+  "SSN2","SSNbler","sf","dplyr","tidyr",
+  "purrr","ggplot2"
+)
+
+for (p in req_pkgs) {
+  if (!requireNamespace(p, quietly = TRUE)) {
+    install.packages(p, repos = "https://cloud.r-project.org")
+  }
+}
+
 
 suppressPackageStartupMessages({
   library(SSN2)

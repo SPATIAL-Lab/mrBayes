@@ -9,7 +9,7 @@ Code for manuscript on blue-green water partitioning of the Mississippi River Ba
 - **MRBayes_sumstats.R** Code for calculating ecohydrologic component summary statistics
 - **FINAL_blockstats_mrbayes.R** Code tests if spatial patterns persist if posterior uncertainty is propagated
 - **FINAL_blue-green_bi-plots.R** Code builds regional headwater vs downstream blue-green bivariate plots
-- **FINAL_ScalingLaw_mrb.R** Code for fig 4 and scaling law climate coupling, aridity, effects on blue-green cycling
+- **FINAL_ScalingLaw_mrb.R** Code for analysing how climate coupling of blue–green water partitioning scales with catchment network position (Figure 4) 
 - 
 ### data/ 
 #

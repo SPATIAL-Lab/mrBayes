@@ -9,6 +9,8 @@ Code for manuscript on blue-green water partitioning of the Mississippi River Ba
 - **MRBayes_sumstats.R** Code for calculating ecohydrologic component summary statistics
 - **FINAL_blockstats_mrbayes.R** Code tests if spatial patterns persist if posterior uncertainty is propagated
 - **FINAL_blue-green_bi-plots.R** Code builds regional headwater vs downstream blue-green bivariate plots
+- **FINAL_ScalingLaw_mrb.R** Code for fig 4 and scaling law climate coupling, aridity, effects on blue-green cycling
+- 
 ### data/ 
 #
 All data files can be downloaded from doi:10.5281/zenodo.17545916
@@ -29,7 +31,8 @@ Data on mrBayes GitHub repository and doi:10.5281/zenodo.17545916
 - **uppermrbbas.RDS** Upper MRB watershed polygon [HydroBASINS](https://www.hydrosheds.org/products/hydrobasins#downloads)
 - **midlowmrb.RDS** Middle-Lower MRB watershed polygon [HydroBASINS](https://www.hydrosheds.org/products/hydrobasins#downloads)
 - **mergedMRBpoly.RDS** MRB watershed polygon [HydroBASINS](https://www.hydrosheds.org/products/hydrobasins#downloads)
-
+- **MRB_AI_mean_2013_2014.tif** MRB Aridity Index PET/P, annual average (years 2013 & 2014) from [TerraClimate](https://www.nature.com/articles/sdata2017191)
+  
 ### out/
 #
 Figures generated from code

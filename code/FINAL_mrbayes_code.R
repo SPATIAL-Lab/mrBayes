@@ -350,7 +350,7 @@ summ_tbl <- dplyr::bind_rows(Filter(Negate(is.null), out_list))
 summ_tbl
 
 # Simplify 
-mrb <- dstreams_bay %>% select(geometry, rid)
+mrb <- dstreams_bay %>% dplyr::select(geometry, rid)
 
 
 # 1) Keep only vector-valued params (those with an index)
@@ -370,7 +370,7 @@ wide_all <- vec_summ %>%
   pivot_longer(cols = c(mean, sd, q025, q500, q975),
                names_to = "stat", values_to = "value") %>%
   mutate(var = paste(Parameter, stat, sep = "_")) %>%
-  select(rid, var, value) %>%
+  dplyr::select(rid, var, value) %>%
   pivot_wider(names_from = var, values_from = value)
 
 # 5) Join back to dstreams_bay

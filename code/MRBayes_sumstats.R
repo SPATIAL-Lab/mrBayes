@@ -8,7 +8,7 @@
 ## ---- 1) Load posterior and ensure matrix ------------------------------------
 # # Inputs (posterior_matrix.RDS) are archived on Zenodo:
 #   DOI: 10.5281/zenodo.17545916 must download and unzip or run FINAL_mrbayes_code.R script to generate.
-post <- readRDS("/PATH/TO/UNZIPPED/zenodo_17545916/posterior_matrix.RDS")   # <-- EDIT THIS
+post <- readRDS("/PATH/TO/UNZIPPED/zenodo_17545916/posterior_matrix.rds")   # <-- EDIT THIS
 post <- posterior_matrix
 ## ---- 2) Helpers --------------------------------------------------------------
 # Extract all columns for an indexed parameter (e.g., "BWF[1]", "BWF[2]", ...)
@@ -54,7 +54,7 @@ summarize_segment_medians <- function(x) {
 BWF   <- extract_indexed(post, "BWF")
 CWF   <- extract_indexed(post, "CWF")
 Ipar  <- extract_indexed(post, "I")        # 'I' is a parameter name
-f_cwf <- extract_indexed(post, "f_cwf")
+f_cwf <- extract_indexed(post, "fcwf")
 MWF   <- extract_indexed(post, "MWF")
 Esoil <- extract_indexed(post, "Esoil")
 Esurf <- extract_indexed(post, "Esurf")

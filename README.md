@@ -11,6 +11,7 @@ Code for manuscript on blue-green water partitioning of the Mississippi River Ba
 - **FINAL_blue-green_bi-plots.R** Code builds regional headwater vs downstream blue-green bivariate plots
 - **FINAL_ScalingLaw_mrb.R** Code for analysing how climate coupling of blue–green water partitioning scales with catchment network position (Figure 4)
 - **FINAL_r2p_test.R** Diagnostics for prior sensitivity and Qin/P structural artefacts in MRB Bayesian mass-balance modeling.
+- **FINAL_out-of-sample_test.R** Out-of-sample residual and seasonal bias diagnostics for SSN river d-excess predictions in the Mississippi River Basin.
 ### data/ 
 #
 All data files can be downloaded from doi:10.5281/zenodo.17545916
@@ -32,6 +33,8 @@ Data on mrBayes GitHub repository and doi:10.5281/zenodo.17545916
 - **midlowmrb.RDS** Middle-Lower MRB watershed polygon [HydroBASINS](https://www.hydrosheds.org/products/hydrobasins#downloads)
 - **mergedMRBpoly.RDS** MRB watershed polygon [HydroBASINS](https://www.hydrosheds.org/products/hydrobasins#downloads)
 - **MRB_AI_mean_2013_2014.tif** MRB Aridity Index PET/P, annual average (years 2013 & 2014) from [TerraClimate](https://www.nature.com/articles/sdata2017191)
+- **1764885248-data.csv** MRB clipped stream and river water isotope data from repository at [waterisotopes.org](https://wateriso.utah.edu/waterisotopes/pages/spatial_db/SPATIAL_DB.html)
+- **sites_18_19.RDS** MRB clipped stream and river water isotope data from National Rivers and Streams Assessment 2018-2019 [NRSA](https://catalog.data.gov/dataset/water-stable-isotope-data-from-nars-nrsa-and-nla)
   
 ### out/
 #

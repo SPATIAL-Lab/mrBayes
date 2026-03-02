@@ -10,7 +10,7 @@ Code for manuscript on blue-green water partitioning of the Mississippi River Ba
 - **FINAL_blockstats_mrbayes.R** Code tests if spatial patterns persist if posterior uncertainty is propagated
 - **FINAL_blue-green_bi-plots.R** Code builds regional headwater vs downstream blue-green bivariate plots
 - **FINAL_ScalingLaw_mrb.R** Code for analysing how climate coupling of blue–green water partitioning scales with catchment network position (Figure 4) 
-- 
+- ** FINAL_r2p_test.R** Diagnostics for prior sensitivity and Qin/P structural artefacts in MRB Bayesian mass-balance modeling.
 ### data/ 
 #
 All data files can be downloaded from doi:10.5281/zenodo.17545916
